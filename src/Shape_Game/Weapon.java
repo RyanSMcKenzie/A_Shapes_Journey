@@ -9,7 +9,24 @@ public class Weapon extends Item {
         this.damageMod = damageMod;
     }
 
-    int getDamageMod(){
+    public int getDamageMod(){
+        switch (getRarity()) {
+            case "uncommon":
+                damageMod *= 2;
+                break;
+
+            case "rare":
+                damageMod *= 3;
+                break;
+
+            case "divine":
+                damageMod *= 4;
+                break;
+
+            case "legendary":
+                damageMod *= 5;
+                break;
+        }
         return damageMod;
     }
 }

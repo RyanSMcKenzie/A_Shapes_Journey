@@ -1,6 +1,8 @@
 package Shape_Game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Display {
     private Room currentRoom;
@@ -31,8 +33,8 @@ public class Display {
         chests.add(chest);
     }
     public void setChestLoc(){
-        for(int i = 0; i < chests.size(); i++){
-            currentRoom.setChestLocation(chests.get(i).getX(), chests.get(i).getY());
+        for (Chest chest : chests) {
+            currentRoom.setChestLocation(chest.getX(), chest.getY());
         }
     }
 
@@ -44,10 +46,37 @@ public class Display {
     }
 
     public void update(){
+        // Clear current display from terminal
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        // Show items in inventory
         System.out.println("Inventory: " + player.getInventory());
+
+        // Show health
         System.out.println("Health: " + player.getHealth() + "/" + player.getMaxHealth());
+
+        // Show current damage
         System.out.println("Damage: " + player.getDamage());
-        System.out.println("Equipped Items: " + player.getEquipped());
+
+        // Show equipped items
+        StringBuilder itemsOut = new StringBuilder();
+        // Iterate through equipped items and concatenate names to out
+        Iterator <Map.Entry <String, Item> >itemOutIter
+                = player.getEquipped().entrySet().iterator();
+
+        while (itemOutIter.hasNext()) {
+            Map.Entry<String, Item> outItem = itemOutIter.next();
+            itemsOut.append(outItem.getValue().getName());
+
+            // Add a sweet comma if not the end of listing
+            if (itemOutIter.hasNext()) {
+                itemsOut.append(", ");
+            }
+        }
+
+        System.out.println("Equipped Items: " + itemsOut.toString());
+        this.setPlayerLoc();
         currentRoom.showArea();
     }
 }

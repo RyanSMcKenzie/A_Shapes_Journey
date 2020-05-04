@@ -21,8 +21,10 @@ public class Main {
         player.move(1,1);
         world.setPlayerLoc();
         world.update();
-        Enemy enemy1 = new Enemy("human", 20, 5);
+        player.equipItem(sword);
+        Enemy enemy1 = new Enemy("Soldier", "human", 10, 5);
         Combat fight = new Combat(player, enemy1);
+        world.update();
 
     }
 }

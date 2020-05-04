@@ -20,7 +20,7 @@ public class Item {
     }
     public String getRarity(){ return rarity; }
 
-    public int getDamageMod() {
+    public int getDamageMod(){
         return 0;
     }
 }

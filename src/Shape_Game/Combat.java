@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Combat {
     private int rounds = 0;
-    private int turn = 1; // Turn alternates between 0 and 1 depending on turn
+    private int turn = 1; // Turn alternates between -1 and 1 depending on turn
     public Combat(Player player, Enemy enemy1){
         // While player and enemy are alive, combat continues
         while (player.getHealth() > 0 && enemy1.getHitpoints() > 0){
@@ -30,9 +30,18 @@ public class Combat {
                     return;
             }
             player.takeDamage(enemy1.getDamage());
-            if (player.getHealth() < 0) {
+            if (player.getHealth() <= 0) {
                 System.out.println("You are dead");
+                break;
             }
+
+            if (enemy1.getHitpoints() <= 0) {
+                String defeat = String.format("You defeated %s", enemy1.getName());
+                System.out.println(defeat);
+            }
+            rounds += 1;
+            turn *= -1;
+
         }
     }
 }
