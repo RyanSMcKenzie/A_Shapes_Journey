@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Combat {
     private int rounds = 0;
     private int turn = 1; // Turn alternates between -1 and 1 depending on turn
-    public Combat(Player player, Enemy enemy1){
+    public Combat(Player player, Enemy enemy1, Display world){
         // While player and enemy are alive, combat continues
         while (player.getHealth() > 0 && enemy1.getHitpoints() > 0){
             Scanner scan = new Scanner(System.in);
@@ -18,6 +18,7 @@ public class Combat {
             switch (Action){
                 case "a":
                     enemy1.takeDamage(player.getDamage());
+                    System.out.println("You dealt " + player.getDamage() + " damage!");
                     break;
                 // Currently items do not have usage abilities
                 case "u":
@@ -29,19 +30,22 @@ public class Combat {
                     System.out.println("You ran away!");
                     return;
             }
+            if (enemy1.getHitpoints() <= 0) {
+                String defeat = String.format("You defeated %s", enemy1.getName());
+                System.out.println(defeat);
+                player.gainXP(enemy1.getMaxHP());
+                break;
+            }
+
             player.takeDamage(enemy1.getDamage());
             if (player.getHealth() <= 0) {
                 System.out.println("You are dead");
                 break;
             }
 
-            if (enemy1.getHitpoints() <= 0) {
-                String defeat = String.format("You defeated %s", enemy1.getName());
-                System.out.println(defeat);
-            }
             rounds += 1;
             turn *= -1;
-
+            world.update();
         }
     }
 }

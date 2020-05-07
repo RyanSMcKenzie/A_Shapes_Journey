@@ -1,8 +1,6 @@
 package Shape_Game;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 public class Display {
     private Room currentRoom;
@@ -45,13 +43,25 @@ public class Display {
         currentRoom.setPlayerLocation(playerX, playerY);
     }
 
+    public void dispPrompt(){
+        System.out.println("What do you want to do?");
+        System.out.println("(F) Pick a fight");
+        System.out.println("(S) Search for loot");
+        System.out.println("(E) Equip item");
+        System.out.println("(M) Move");
+        System.out.println("(L) Let darkness consume you");
+    }
+
     public void update(){
         // Clear current display from terminal
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
+        // Show level and experience
+        System.out.println("Level: " + player.getLevel());
+        System.out.println("Experience: " + player.showExp());
         // Show items in inventory
-        System.out.println("Inventory: " + player.getInventory());
+        System.out.println("Inventory: " + player.showInventory());
 
         // Show health
         System.out.println("Health: " + player.getHealth() + "/" + player.getMaxHealth());
@@ -59,24 +69,11 @@ public class Display {
         // Show current damage
         System.out.println("Damage: " + player.getDamage());
 
-        // Show equipped items
-        StringBuilder itemsOut = new StringBuilder();
-        // Iterate through equipped items and concatenate names to out
-        Iterator <Map.Entry <String, Item> >itemOutIter
-                = player.getEquipped().entrySet().iterator();
 
-        while (itemOutIter.hasNext()) {
-            Map.Entry<String, Item> outItem = itemOutIter.next();
-            itemsOut.append(outItem.getValue().getName());
 
-            // Add a sweet comma if not the end of listing
-            if (itemOutIter.hasNext()) {
-                itemsOut.append(", ");
-            }
-        }
-
-        System.out.println("Equipped Items: " + itemsOut.toString());
+        System.out.println("Equipped Items: " + player.showEquipped());
         this.setPlayerLoc();
         currentRoom.showArea();
+        this.dispPrompt();
     }
 }

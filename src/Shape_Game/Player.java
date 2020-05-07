@@ -2,10 +2,14 @@ package Shape_Game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Player {
     // Player class: level, health, base damage, inventory items arraylist
-    private int level = 0;
+    private int level = 1;
+    private int experiencePoints = 0;
+    private int experienceToLevel = 100;
     private int maxHealth = 10;
     private int health = 10;
     private int damage = 10;
@@ -13,13 +17,28 @@ public class Player {
     private int roomX = 0;
     private int roomY = 4;
     private HashMap<String, Item> equipped  = new HashMap<>();
-    private java.util.ArrayList<Item> inventory = new ArrayList<Item>();
+    private HashMap<String, Item> inventory = new HashMap<>();
 
     public Player(){}
+
     //Increments player level
     public void level_up(){
         level++;
         maxHealth = maxHealth + 5;
+        health = health + 5;
+        damage = damage + 1;
+    }
+
+    public void gainXP(int exp){
+        experiencePoints += exp;
+        if (experiencePoints >= experienceToLevel){
+            level_up();
+            experienceToLevel *= 2.5;
+        }
+    }
+    public String showExp(){
+        return Integer.toString(experiencePoints) + "/"
+                + Integer.toString(experienceToLevel);
     }
     //Returns health to player
     public void heal(int amount){
@@ -99,20 +118,60 @@ public class Player {
     }
     //Adds an item to player's inventory
     public void pick_up(Item new_item){
-        inventory.add(new_item);
+        inventory.put(new_item.getName(),new_item);
     }
 
     //Returns contents of players inventory
-    public ArrayList<Item> getInventory() {
+    public HashMap<String, Item> getInventory() {
         return inventory;
     }
 
-    //Puts item into equipped location slot
-    public void equipItem(Item to_equip) {
-        equipped.put(to_equip.getItem_type(), to_equip);
+    public String showInventory() {
+        // Show inventory items
+        StringBuilder itemsOut = new StringBuilder();
+        // Iterate through inventory items and concatenate names to out
+        Iterator <Map.Entry <String, Item> >itemOutIter
+                = getInventory().entrySet().iterator();
+
+        while (itemOutIter.hasNext()) {
+            Map.Entry<String, Item> outItem = itemOutIter.next();
+            itemsOut.append(outItem.getValue().getName());
+
+            // Add a sweet comma if not the end of listing
+            if (itemOutIter.hasNext()) {
+                itemsOut.append(", ");
+            }
+        }
+        return itemsOut.toString();
     }
+
+    //Puts item into equipped location slot
+    public void equipItem(String to_equip) {
+        if (inventory.containsKey(to_equip)){
+            equipped.put(inventory.get(to_equip).getItem_type(),
+                    inventory.get(to_equip));
+            }
+        }
 
     //Returns players current equipped items
     public HashMap<String, Item> getEquipped(){ return equipped; }
 
+    public String showEquipped() {
+        // Show equipped items
+        StringBuilder itemsOut = new StringBuilder();
+        // Iterate through equipped items and concatenate names to out
+        Iterator<Map.Entry <String, Item> > itemOutIter
+                = getEquipped().entrySet().iterator();
+
+        while (itemOutIter.hasNext()) {
+            Map.Entry<String, Item> outItem = itemOutIter.next();
+            itemsOut.append(outItem.getValue().getName());
+
+            // Add a sweet comma if not the end of listing
+            if (itemOutIter.hasNext()) {
+                itemsOut.append(", ");
+            }
+        }
+        return itemsOut.toString();
+    }
 }

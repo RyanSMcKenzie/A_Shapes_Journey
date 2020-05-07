@@ -1,30 +1,67 @@
 package Shape_Game;
 
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
         Player player = new Player();
         Room dungeon = new Room("Dungeon");
         Display world = new Display();
+        
         world.setPlayer(player);
         player.setRoomX(1);
         player.setRoomY(1);
         world.setCurrentRoom(dungeon);
-        Weapon sword = new Weapon("sword", "weapon","common",
-                5, "hand");
-        Chest chest1 = new Chest(3, 3);
-        world.addChest(chest1);
-        world.setChestLoc();
-        world.setPlayerLoc();
+        Weapon sword = new Weapon(Weapon.Weapons.SWORD);
+        player.pick_up(sword);
         world.update();
-        player.move(1,1);
-        world.setPlayerLoc();
-        world.update();
-        player.equipItem(sword);
-        Enemy enemy1 = new Enemy("Soldier", "human", 10, 5);
-        Combat fight = new Combat(player, enemy1);
-        world.update();
+        Scanner eventScan = new Scanner(System.in);
+        Selector select = new Selector();
+        while (player.getHealth() > 0) {
+            String act = eventScan.nextLine();
+            switch (act) {
+                case "f":
+                    Enemy enemy1 = select.randomEnemy();
+                    String encounter = "You encountered: " + enemy1.getName();
+                    System.out.println(encounter);
+                    Combat fight = new Combat(player, enemy1, world);
+                    break;
 
+                case "s":
+                    //player.pick_up(loot_item);
+                    break;
+                case "e":
+                    System.out.println("What do you want to equip?");
+                    String eqItem = eventScan.nextLine();
+                    if (player.getInventory().containsKey(eqItem)){
+                        player.equipItem(eqItem);
+                    }
+                    else {
+                        System.out.println("Item not in inventory");
+                    }
+                    break;
+                case "m":
+                    System.out.println("Where on the 10x10 grid? (x, y)");
+                    String[] loc = eventScan.nextLine().split(",");
+                    int x_coord = Integer.parseInt(loc[0]) - 1;
+                    int y_coord = Integer.parseInt(loc[1]) - 1;
+                    if (x_coord >= 0 & x_coord <= 9
+                    & y_coord >= 0 & y_coord <= 9){
+                        player.move(x_coord, y_coord);
+                    }
+                    else {
+                        System.out.println("You can't go there!");
+                    }
+                    break;
+
+                case "l":
+                    System.out.println("Your journey has ended");
+                    return;
+            }
+            world.update();
+        }
+        System.out.println("Your journey has ended");
     }
 }
