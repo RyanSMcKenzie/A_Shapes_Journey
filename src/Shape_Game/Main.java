@@ -14,8 +14,10 @@ public class Main {
         player.setRoomX(1);
         player.setRoomY(1);
         world.setCurrentRoom(dungeon);
-        Weapon sword = new Weapon(Weapon.Weapons.SWORD);
+        Weapon sword = new Weapon(Weapon.Weapons.RYAN_BLADE);
         player.pick_up(sword);
+        Potion heal = new Potion(Potion.Potions.HEALTHPOT);
+        player.pick_up(heal);
         world.update();
         Scanner eventScan = new Scanner(System.in);
         Selector select = new Selector();

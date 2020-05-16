@@ -42,10 +42,7 @@ public class Player {
     }
     //Returns health to player
     public void heal(int amount){
-        if ((health + amount) > maxHealth){
-            health = maxHealth;
-        }
-        else health = health + amount;
+        health = Math.min((health + amount), maxHealth);
     }
 
     //Increases players damage amount
@@ -173,5 +170,25 @@ public class Player {
             }
         }
         return itemsOut.toString();
+    }
+
+    // Allows players to consume potion items
+    public void use_potion(Item pot){
+        if (!pot.getItem_type().equals("Potion")){
+            return;
+        }
+        String eff = pot.getEffect();
+
+        // Effect depends on potion effect and modifier quantity
+        switch (eff){
+            case "HP":
+                heal(pot.getModifier());
+                break;
+
+            case "DAM":
+                damage += pot.getModifier();
+                break;
+        }
+        inventory.remove(pot.getName());
     }
 }

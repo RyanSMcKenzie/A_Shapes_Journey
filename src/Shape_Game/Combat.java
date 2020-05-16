@@ -20,10 +20,16 @@ public class Combat {
                     enemy1.takeDamage(player.getDamage());
                     System.out.println("You dealt " + player.getDamage() + " damage!");
                     break;
-                // Currently items do not have usage abilities
+                // Player uses an item
                 case "u":
                     System.out.println("Which inventory item would you like to use?");
                     String invItem = scan.nextLine();
+                    if (player.getInventory().containsKey(invItem)){
+                        String iType = player.getInventory().get(invItem).getItem_type();
+                        if (iType.equals("Potion")) {
+                            player.use_potion(player.getInventory().get(invItem));
+                        }
+                    }
                     break;
 
                 case "r":
@@ -34,12 +40,14 @@ public class Combat {
                 String defeat = String.format("You defeated %s", enemy1.getName());
                 System.out.println(defeat);
                 player.gainXP(enemy1.getMaxHP());
+                scan.nextLine();
                 break;
             }
 
             player.takeDamage(enemy1.getDamage());
             if (player.getHealth() <= 0) {
                 System.out.println("You are dead");
+                scan.nextLine();
                 break;
             }
 
