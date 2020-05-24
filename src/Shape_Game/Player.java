@@ -18,6 +18,7 @@ public class Player {
     private int roomY = 4;
     private HashMap<String, Item> equipped  = new HashMap<>();
     private HashMap<String, Item> inventory = new HashMap<>();
+    private HashMap<Item, Integer> invCounts = new HashMap<>();
 
     public Player(){}
 
@@ -115,7 +116,15 @@ public class Player {
     }
     //Adds an item to player's inventory
     public void pick_up(Item new_item){
-        inventory.put(new_item.getName(),new_item);
+        // If the player does not have an item of this kind
+        if (!inventory.containsKey(new_item.getName())) {
+            inventory.put(new_item.getName(), new_item);
+            invCounts.put(new_item, 1);
+        }
+        // If they do, increase the quantity of this item
+        else {
+            invCounts.put(new_item, invCounts.get(new_item)+1);
+        }
     }
 
     //Returns contents of players inventory
@@ -133,6 +142,7 @@ public class Player {
         while (itemOutIter.hasNext()) {
             Map.Entry<String, Item> outItem = itemOutIter.next();
             itemsOut.append(outItem.getValue().getName());
+            itemsOut.append("(").append(invCounts.get(outItem.getValue()).toString()).append(")");
 
             // Add a sweet comma if not the end of listing
             if (itemOutIter.hasNext()) {
@@ -189,6 +199,10 @@ public class Player {
                 damage += pot.getModifier();
                 break;
         }
-        inventory.remove(pot.getName());
+        invCounts.put(pot, invCounts.get(pot) - 1);
+        if (invCounts.get(pot) < 1) {
+            inventory.remove(pot.getName());
+            invCounts.remove(pot);
+        }
     }
 }

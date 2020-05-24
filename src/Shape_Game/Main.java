@@ -18,6 +18,7 @@ public class Main {
         player.pick_up(sword);
         Potion heal = new Potion(Potion.Potions.HEALTHPOT);
         player.pick_up(heal);
+        player.pick_up(heal);
         world.update();
         Scanner eventScan = new Scanner(System.in);
         Selector select = new Selector();
