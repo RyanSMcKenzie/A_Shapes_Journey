@@ -78,7 +78,14 @@ public class Player {
 
     }
 
-    public void takeDamage(int dam) { health = health - dam; }
+    public void takeDamage(int dam) {
+        if (equipped.containsKey("Armor")){
+            dam -= equipped.get("Armor").getDamageRed();
+            if (dam < 0){
+                dam = 0;
+            }
+        }
+        health = health - dam; }
     //Players current room
     public Room getCurrentRoom(){
         return currentRoom;
@@ -199,6 +206,9 @@ public class Player {
                 damage += pot.getModifier();
                 break;
         }
+
+        // Usage of any item, including potions, reduces its quantity
+        //  and removes the item if its count reaches 0
         invCounts.put(pot, invCounts.get(pot) - 1);
         if (invCounts.get(pot) < 1) {
             inventory.remove(pot.getName());

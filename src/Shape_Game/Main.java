@@ -17,6 +17,8 @@ public class Main {
         Weapon sword = new Weapon(Weapon.Weapons.RYAN_BLADE);
         player.pick_up(sword);
         Potion heal = new Potion(Potion.Potions.HEALTHPOT);
+        Armor power = new Armor(Armor.Armors.RYANSPLATE);
+        player.pick_up(power);
         player.pick_up(heal);
         player.pick_up(heal);
         world.update();

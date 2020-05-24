@@ -12,4 +12,9 @@ public class Selector {
         int pick = new Random().nextInt(Weapon.Weapons.values().length);
         return new Weapon(Weapon.Weapons.values()[pick]);
     }
+
+    public Potion randomPotion(){
+        int pick = new Random().nextInt(Potion.Potions.values().length);
+        return new Potion(Potion.Potions.values()[pick]);
+    }
 }

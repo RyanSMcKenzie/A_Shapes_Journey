@@ -27,4 +27,7 @@ public class Item {
     }
     public String getEffect() {return "None"; }
     public int getModifier() {return 0;}
+
+    public int getDamageRed() { return 0;
+    }
 }
