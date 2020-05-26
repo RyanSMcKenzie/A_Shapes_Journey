@@ -8,6 +8,8 @@ public class Weapon extends Item {
         DAGGER("Dagger","Weapon","Common",5,"Hand"),
         STAFF("Staff", "Weapon","Common",12,"Hand"),
         AXE("Axe","Weapon","Common",11,"Hand"),
+        SCIMITAR("Scimitar","Weapon","Common",11,"Hand"),
+        GREATSWORD("Greatsword","Weapon","Common",13,"Hand"),
         WAND("Wand","Weapon","Common",7,"Hand"),
         RYAN_BLADE("Ryan's Blade","Weapon","Legendary",
                 11,"Hand");

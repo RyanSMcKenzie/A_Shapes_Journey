@@ -36,13 +36,17 @@ public class Display {
         playerY = y;
         currentRoom.resetLoc(playerX, playerY);
 
-        if (x == 9 & y == 9){
-            Room newRoom = new Room(currentRoom.getNextRoom());
-            setCurrentRoom(newRoom);
-            playerX = 0;
-            playerY = 0;
+        if (x == 9 & y == 9) {
+            try {
+                Room newRoom = new Room(currentRoom.getNextRoom());
+                setCurrentRoom(newRoom);
+                playerX = 0;
+                playerY = 0;
+            } catch (Exception NullPointerException) {
+                System.out.print("");
+            }
+            currentRoom.setPlayerLocation(playerX, playerY);
         }
-        currentRoom.setPlayerLocation(playerX, playerY);
     }
 
     public void dispPrompt(){

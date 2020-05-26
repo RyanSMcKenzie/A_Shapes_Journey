@@ -19,6 +19,13 @@ public class Player {
     private HashMap<String, Item> equipped  = new HashMap<>();
     private HashMap<String, Item> inventory = new HashMap<>();
     private HashMap<String, Integer> invCounts = new HashMap<>();
+    private HashMap<String, String> invColors = new HashMap<>(){{
+        put("Common", "\u001B[37m");
+        put("Uncommon", "\u001B[32m");
+        put("Rare", "\u001B[35m");
+        put("Divine", "\u001B[33m");
+        put("Legendary", "\u001B[31m");
+    }};
 
     public Player(){}
 
@@ -114,6 +121,7 @@ public class Player {
 
         while (itemOutIter.hasNext()) {
             Map.Entry<String, Item> outItem = itemOutIter.next();
+            itemsOut.append(invColors.get(outItem.getValue().getRarity()));
             itemsOut.append(outItem.getValue().getName());
             itemsOut.append("(").append(invCounts.get(outItem.getValue().getName())
                     .toString()).append(")");
@@ -123,6 +131,7 @@ public class Player {
                 itemsOut.append(", ");
             }
         }
+        itemsOut.append("\u001B[0m");
         return itemsOut.toString();
     }
 
@@ -146,6 +155,7 @@ public class Player {
 
         while (itemOutIter.hasNext()) {
             Map.Entry<String, Item> outItem = itemOutIter.next();
+            itemsOut.append(invColors.get(outItem.getValue().getRarity()));
             itemsOut.append(outItem.getValue().getName());
 
             // Add a sweet comma if not the end of listing
@@ -153,6 +163,7 @@ public class Player {
                 itemsOut.append(", ");
             }
         }
+        itemsOut.append("\u001B[0m");
         return itemsOut.toString();
     }
 

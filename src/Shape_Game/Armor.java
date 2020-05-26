@@ -8,7 +8,8 @@ public class Armor extends Item {
         LEATHER("Leather","Armor","Common",3,"Body"),
         ROBES("Robes","Armor","Common",1,"Body"),
         PLATE("Platemail","Armor","Common",5,"Body"),
-        RYANSPLATE("Ryan's Super Plate","Armor","Rare", 15, "Body");
+        RYANSPLATE("Ryan's Super Plate","Armor","Legendary",
+                15, "Body");
 
         private final String name;
         private final String item_type;
