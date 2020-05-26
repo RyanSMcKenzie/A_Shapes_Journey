@@ -18,7 +18,7 @@ public class Player {
     private int roomY = 4;
     private HashMap<String, Item> equipped  = new HashMap<>();
     private HashMap<String, Item> inventory = new HashMap<>();
-    private HashMap<Item, Integer> invCounts = new HashMap<>();
+    private HashMap<String, Integer> invCounts = new HashMap<>();
 
     public Player(){}
 
@@ -86,51 +86,17 @@ public class Player {
             }
         }
         health = health - dam; }
-    //Players current room
-    public Room getCurrentRoom(){
-        return currentRoom;
-    }
 
-    // Change current player room
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    // Get X-coordinate of player in room
-    public int getRoomX() {
-        return roomX;
-    }
-
-    // Get Y-coordinate of player in room
-    public int getRoomY() {
-        return roomY;
-    }
-
-    // Set X-coord of player in room
-    public void setRoomX(int roomX) {
-        this.roomX = roomX;
-    }
-
-    // Set Y-coord of player in room
-    public void setRoomY(int roomY) {
-        this.roomY = roomY;
-    }
-
-    // Move player position by some (x, y) offset
-    public void move(int x, int y) {
-        setRoomX(x);
-        setRoomY(y);
-    }
     //Adds an item to player's inventory
     public void pick_up(Item new_item){
         // If the player does not have an item of this kind
         if (!inventory.containsKey(new_item.getName())) {
             inventory.put(new_item.getName(), new_item);
-            invCounts.put(new_item, 1);
+            invCounts.put(new_item.getName(), 1);
         }
         // If they do, increase the quantity of this item
         else {
-            invCounts.put(new_item, invCounts.get(new_item)+1);
+            invCounts.put(new_item.getName(), invCounts.get(new_item.getName())+1);
         }
     }
 
@@ -149,7 +115,8 @@ public class Player {
         while (itemOutIter.hasNext()) {
             Map.Entry<String, Item> outItem = itemOutIter.next();
             itemsOut.append(outItem.getValue().getName());
-            itemsOut.append("(").append(invCounts.get(outItem.getValue()).toString()).append(")");
+            itemsOut.append("(").append(invCounts.get(outItem.getValue().getName())
+                    .toString()).append(")");
 
             // Add a sweet comma if not the end of listing
             if (itemOutIter.hasNext()) {
@@ -209,10 +176,10 @@ public class Player {
 
         // Usage of any item, including potions, reduces its quantity
         //  and removes the item if its count reaches 0
-        invCounts.put(pot, invCounts.get(pot) - 1);
-        if (invCounts.get(pot) < 1) {
+        invCounts.put(pot.getName(), invCounts.get(pot.getName()) - 1);
+        if (invCounts.get(pot.getName()) < 1) {
             inventory.remove(pot.getName());
-            invCounts.remove(pot);
+            invCounts.remove(pot.getName());
         }
     }
 }

@@ -5,22 +5,16 @@ import java.util.ArrayList;
 public class Display {
     private Room currentRoom;
     private Player player;
-    private int playerX;
-    private int playerY;
+    private int playerX = 1;
+    private int playerY = 1;
     private ArrayList<Chest> chests = new ArrayList<>();
 
     public Display(){}
 
     public void setCurrentRoom(Room room){
+
         currentRoom = room;
-    }
-
-    public void setPlayerX(){
-        playerX = player.getRoomX();
-    }
-
-    public void setPlayerY(){
-        playerY = player.getRoomY();
+        currentRoom.setPlayerLocation(0, 0);
     }
 
     public void setPlayer(Player player){
@@ -36,10 +30,18 @@ public class Display {
         }
     }
 
-    public void setPlayerLoc(){
+    // Move player position by some (x, y) offset
+    public void movePlayer(int x, int y) {
+        playerX = x;
+        playerY = y;
         currentRoom.resetLoc(playerX, playerY);
-        setPlayerX();
-        setPlayerY();
+
+        if (x == 9 & y == 9){
+            Room newRoom = new Room(currentRoom.getNextRoom());
+            setCurrentRoom(newRoom);
+            playerX = 0;
+            playerY = 0;
+        }
         currentRoom.setPlayerLocation(playerX, playerY);
     }
 
@@ -72,8 +74,10 @@ public class Display {
 
 
         System.out.println("Equipped Items: " + player.showEquipped());
-        this.setPlayerLoc();
+
         currentRoom.showArea();
         this.dispPrompt();
+
+
     }
 }

@@ -3,19 +3,41 @@ package Shape_Game;
 
 public class Room {
     private String name;
-    private Room north;
-    private Room south;
-    private Room east;
-    private Room west;
-    private String[][] area = new String[10][10];
+    private Rooms nextRoom;
+    private final String[][] area = new String[10][10];
 
-    public Room(String name) {
+    public enum Rooms{
+        UNDERWORLD("Underworld"),
+        SHRINE("Shrine", Rooms.UNDERWORLD),
+        DARKTEMPLE("Dark Temple", Rooms.SHRINE),
+        HIDDENCAVE("Hidden Cave", Rooms.DARKTEMPLE),
+        DUNGEON("Dungeon", Rooms.HIDDENCAVE),
+        BASEMENT("Basement", Rooms.DUNGEON),
+        FOYER("Foyer", Rooms.BASEMENT),
+        GARDEN("Garden", Rooms.FOYER),
+        COURTYARD("Courtyard", Rooms.GARDEN);
+
+        private final String name;
+        private Rooms nextRoom;
+
+        Rooms(String name){
+            this.name = name;
+        }
+
+        Rooms(String name, Rooms nextRoom){
+            this.name = name;
+            this.nextRoom = nextRoom;
+        }
+    }
+
+    public Room(Rooms room) {
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
                 area[i][j] = "  ";
             }
         }
-        this.name = name;
+        this.name = room.name;
+        this.nextRoom = room.nextRoom;
     }
     void showArea(){
         for (int i = 0; i < 10; i++){
@@ -23,7 +45,14 @@ public class Room {
             for (int j = 0; j < 10; j++){
                 System.out.print(area[i][j]);
             }
-            System.out.println("|");
+            if (i == 0){
+                System.out.print("|");
+                System.out.println("   "+this.name);
+            }
+            else{
+                System.out.println("|");
+            }
+
         }
     }
     void setChestLocation(int x, int y){
@@ -37,31 +66,12 @@ public class Room {
     void setPlayerLocation(int x, int y){
         area[y][x] = "O ";
     }
-    void setNorth(Room nextRoom){
-        north = nextRoom;
+
+    Rooms getNextRoom(){
+        return nextRoom;
     }
-    void setSouth(Room nextRoom){
-        south = nextRoom;
-    }
-    void setEast(Room nextRoom){
-        east = nextRoom;
-    }
-    void setWest(Room nextRoom){
-        west = nextRoom;
-    }
+
     String getName(){
         return name;
-    }
-    Room getNorth() {
-        return north;
-    }
-    Room getSouth() {
-        return south;
-    }
-    Room getEast() {
-        return east;
-    }
-    Room getWest() {
-        return west;
     }
 }

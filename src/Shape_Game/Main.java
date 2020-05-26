@@ -7,20 +7,19 @@ public class Main {
 
     public static void main(String[] args) {
         Player player = new Player();
-        Room dungeon = new Room("Dungeon");
+        Room court = new Room(Room.Rooms.COURTYARD);
         Display world = new Display();
         
         world.setPlayer(player);
-        player.setRoomX(1);
-        player.setRoomY(1);
-        world.setCurrentRoom(dungeon);
+        world.setCurrentRoom(court);
         Weapon sword = new Weapon(Weapon.Weapons.RYAN_BLADE);
         player.pick_up(sword);
         Potion heal = new Potion(Potion.Potions.HEALTHPOT);
+        Potion health = new Potion(Potion.Potions.HEALTHPOT);
         Armor power = new Armor(Armor.Armors.RYANSPLATE);
         player.pick_up(power);
         player.pick_up(heal);
-        player.pick_up(heal);
+        player.pick_up(health);
         world.update();
         Scanner eventScan = new Scanner(System.in);
         Selector select = new Selector();
@@ -48,13 +47,13 @@ public class Main {
                     }
                     break;
                 case "m":
-                    System.out.println("Where on the 10x10 grid? (x, y)");
+                    System.out.println("Where on the 10x10 grid? (x,y)");
                     String[] loc = eventScan.nextLine().split(",");
                     int x_coord = Integer.parseInt(loc[0]) - 1;
                     int y_coord = Integer.parseInt(loc[1]) - 1;
                     if (x_coord >= 0 & x_coord <= 9
                     & y_coord >= 0 & y_coord <= 9){
-                        player.move(x_coord, y_coord);
+                        world.movePlayer(x_coord, y_coord);
                     }
                     else {
                         System.out.println("You can't go there!");
