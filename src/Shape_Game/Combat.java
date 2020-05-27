@@ -6,6 +6,9 @@ public class Combat {
     private int rounds = 0;
     private int turn = 1; // Turn alternates between -1 and 1 depending on turn
     public Combat(Player player, Enemy enemy1, Display world){
+        boolean potUsed = false;
+        String potType = "";
+        Item toUse = new Potion(Potion.Potions.HEALTHPOT);
         // While player and enemy are alive, combat continues
         while (player.getHealth() > 0 && enemy1.getHitpoints() > 0){
             Scanner scan = new Scanner(System.in);
@@ -14,6 +17,7 @@ public class Combat {
             System.out.println("U: Use inventory item");
             System.out.println("R: Run");
             String Action = scan.nextLine();
+
             // Player action decision
             switch (Action){
                 case "a":
@@ -27,7 +31,10 @@ public class Combat {
                     if (player.getInventory().containsKey(invItem)){
                         String iType = player.getInventory().get(invItem).getItem_type();
                         if (iType.equals("Potion")) {
-                            player.use_potion(player.getInventory().get(invItem));
+                            toUse = player.getInventory().get(invItem);
+                            player.use_potion(toUse);
+                            potUsed = true;
+                            potType = toUse.getEffect();
                         }
                     }
                     break;
@@ -54,6 +61,9 @@ public class Combat {
             rounds += 1;
             turn *= -1;
             world.update();
+        }
+        if (potUsed & potType.equals("DAM")){
+            player.resetPotion(toUse);
         }
     }
 }

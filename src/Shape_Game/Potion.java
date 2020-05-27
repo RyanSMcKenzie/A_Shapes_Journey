@@ -11,7 +11,11 @@ public class Potion extends Item {
         GHEALTHPOT("Greater Health Potion", "Potion", "Rare",
                 "None", "HP", 25),
         DAMPOT("Damage Potion", "Potion", "Uncommon",
-                "None", "DAM",10);
+                "None", "DAM",10),
+        XPOT("Experience Potion","Potion","Divine","None",
+                "XP",1000),
+        GXPOT("Greater Experience Potion","Potion","Legendary","None",
+                "XP",0);
 
         private final String name;
         private final String item_type;

@@ -23,7 +23,7 @@ public class Player {
         put("Common", "\u001B[37m");
         put("Uncommon", "\u001B[32m");
         put("Rare", "\u001B[35m");
-        put("Divine", "\u001B[33m");
+        put("Divine", "\u001b[93m");
         put("Legendary", "\u001B[31m");
     }};
 
@@ -35,13 +35,13 @@ public class Player {
         maxHealth = maxHealth + 5;
         health = health + 5;
         damage = damage + 1;
+        experienceToLevel *= 2.5;
     }
 
     public void gainXP(int exp){
         experiencePoints += exp;
         if (experiencePoints >= experienceToLevel){
             level_up();
-            experienceToLevel *= 2.5;
         }
     }
     public String showExp(){
@@ -183,14 +183,26 @@ public class Player {
             case "DAM":
                 damage += pot.getModifier();
                 break;
-        }
 
+            case "XP":
+                gainXP(pot.getModifier());
+                if (pot.getModifier() == 0){
+                    level_up();
+                }
+                break;
+        }
         // Usage of any item, including potions, reduces its quantity
         //  and removes the item if its count reaches 0
         invCounts.put(pot.getName(), invCounts.get(pot.getName()) - 1);
         if (invCounts.get(pot.getName()) < 1) {
             inventory.remove(pot.getName());
             invCounts.remove(pot.getName());
+        }
+    }
+
+    public void resetPotion(Item pot){
+        if (pot.getItem_type().equals("Potion") & pot.getEffect().equals("DAM")){
+            damage -= pot.getModifier();
         }
     }
 }

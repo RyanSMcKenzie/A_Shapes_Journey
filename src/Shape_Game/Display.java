@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Display {
     private Room currentRoom;
     private Player player;
-    private int playerX = 1;
-    private int playerY = 1;
+    private int playerX = 0;
+    private int playerY = 0;
     private ArrayList<Chest> chests = new ArrayList<>();
 
     public Display(){}
 
     public void setCurrentRoom(Room room){
-
+        // Sets room location for player
         currentRoom = room;
         currentRoom.setPlayerLocation(0, 0);
     }
@@ -32,11 +32,14 @@ public class Display {
 
     // Move player position by some (x, y) offset
     public void movePlayer(int x, int y) {
+        currentRoom.resetLoc(playerX, playerY);
         playerX = x;
         playerY = y;
-        currentRoom.resetLoc(playerX, playerY);
 
+        // If player enters the allotted door space, move to next room
         if (x == 9 & y == 9) {
+
+            // Try-Catch prevents crash for final room (no nextRoom)
             try {
                 Room newRoom = new Room(currentRoom.getNextRoom());
                 setCurrentRoom(newRoom);
@@ -45,8 +48,8 @@ public class Display {
             } catch (Exception NullPointerException) {
                 System.out.print("");
             }
-            currentRoom.setPlayerLocation(playerX, playerY);
         }
+        currentRoom.setPlayerLocation(playerX, playerY);
     }
 
     public void dispPrompt(){

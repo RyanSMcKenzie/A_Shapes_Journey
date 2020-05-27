@@ -5,12 +5,21 @@ public class Weapon extends Item {
     private int damageMod;
     public enum Weapons {
         SWORD("Sword","Weapon","Common",10,"Hand"),
+        SSWORD("Steel Sword","Weapon","Uncommon",11,"Hand"),
+        MSWORD("Mystic Sword","Weapon","Rare",13,"Hand"),
+        DSWORD("Dark Edge","Weapon","Divine",14,"Hand"),
         DAGGER("Dagger","Weapon","Common",5,"Hand"),
+        SDAGGER("Steel Dagger","Weapon","Uncommon",6,"Hand"),
+        WDAGGER("Witch Knife","Weapon","Rare",7,"Hand"),
+        DDAGGER("Demonic Razor","Weapon","Divine",8,"Hand"),
         STAFF("Staff", "Weapon","Common",12,"Hand"),
         AXE("Axe","Weapon","Common",11,"Hand"),
         SCIMITAR("Scimitar","Weapon","Common",11,"Hand"),
         GREATSWORD("Greatsword","Weapon","Common",13,"Hand"),
         WAND("Wand","Weapon","Common",7,"Hand"),
+        FWAND("Fire Wand","Weapon","Uncommon",10,"Hand"),
+        IWAND("Ice Wand","Weapon","Rare",13,"Hand"),
+        SWAND("Shadow Wand","Weapon","Divine",17,"Hand"),
         RYAN_BLADE("Ryan's Blade","Weapon","Legendary",
                 11,"Hand");
 
