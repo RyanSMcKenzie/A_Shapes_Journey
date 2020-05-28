@@ -9,14 +9,12 @@ public class Main {
         Player player = new Player();
         Room court = new Room(Room.Rooms.COURTYARD);
         Display world = new Display();
-        
+        Combat fight = new Combat();
         world.setPlayer(player);
         world.setCurrentRoom(court);
-        Weapon sword = new Weapon(Weapon.Weapons.RYAN_BLADE);
+        Weapon sword = new Weapon(Weapon.Weapons.SWORD);
         player.pick_up(sword);
         Potion heal = new Potion(Potion.Potions.HEALTHPOT);
-        Armor power = new Armor(Armor.Armors.RYANSPLATE);
-        player.pick_up(power);
         player.pick_up(heal);
         world.update();
         Scanner eventScan = new Scanner(System.in);
@@ -28,13 +26,21 @@ public class Main {
                     Enemy enemy1 = select.randomEnemy();
                     String encounter = "You encountered: " + enemy1.getName();
                     System.out.println(encounter);
-                    Combat fight = new Combat(player, enemy1, world);
+                    fight.startCombat(player, enemy1, world);
+                    if (player.getHealth() > 0 & enemy1.getHitpoints() <= 0){
+                        if (select.lootChance()) {
+                            Chest drop = new Chest(select.randomX(), select.randomY(),
+                                    select.randomLoot());
+                            world.addChest(drop);
+                        }
+                    }
                     break;
 
                 case "s":
                     //player.pick_up(loot_item);
                     break;
                 case "e":
+                    // Moves an item in inventory to player's equipment
                     System.out.println("What do you want to equip?");
                     String eqItem = eventScan.nextLine();
                     if (player.getInventory().containsKey(eqItem)){
@@ -44,7 +50,9 @@ public class Main {
                         System.out.println("Item not in inventory");
                     }
                     break;
+
                 case "m":
+                    // Moves player to another location in room
                     System.out.println("Where on the 10x10 grid? (x,y)");
                     String[] loc = eventScan.nextLine().split(",");
                     int x_coord = Integer.parseInt(loc[0]) - 1;

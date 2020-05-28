@@ -3,6 +3,19 @@ package Shape_Game;
 import java.util.Random;
 
 public class Selector {
+    public int randomX(){
+        return new Random().nextInt(9);
+    }
+
+    public int randomY(){
+        return new Random().nextInt(9);
+    }
+
+    public boolean lootChance(){
+        int dropped = new Random().nextInt(3);
+        return dropped == 2;
+    }
+
     public Enemy randomEnemy(){
         int pick = new Random().nextInt(Enemy.Enemies.values().length);
         return new Enemy(Enemy.Enemies.values()[pick]);

@@ -3,12 +3,15 @@ package Shape_Game;
 import java.util.Scanner;
 
 public class Combat {
-    private int rounds = 0;
-    private int turn = 1; // Turn alternates between -1 and 1 depending on turn
-    public Combat(Player player, Enemy enemy1, Display world){
+    public Combat(){ }
+
+    public void startCombat(Player player, Enemy enemy1, Display world){
         boolean potUsed = false;
         String potType = "";
         Item toUse = new Potion(Potion.Potions.HEALTHPOT);
+        int rounds = 0;
+        int turn = 1;
+
         // While player and enemy are alive, combat continues
         while (player.getHealth() > 0 && enemy1.getHitpoints() > 0){
             Scanner scan = new Scanner(System.in);
@@ -65,5 +68,5 @@ public class Combat {
         if (potUsed & potType.equals("DAM")){
             player.resetPotion(toUse);
         }
-    }
-}
+    }}
+

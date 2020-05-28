@@ -22,12 +22,9 @@ public class Display {
     }
 
     public void addChest(Chest chest){
+
         chests.add(chest);
-    }
-    public void setChestLoc(){
-        for (Chest chest : chests) {
-            currentRoom.setChestLocation(chest.getX(), chest.getY());
-        }
+        currentRoom.setChestLocation(chest.getX(), chest.getY());
     }
 
     // Move player position by some (x, y) offset
@@ -47,6 +44,13 @@ public class Display {
                 playerY = 0;
             } catch (Exception NullPointerException) {
                 System.out.print("");
+            }
+        }
+        if (currentRoom.getLoc(x, y).equals("C ")){
+            for (Chest chest: chests){
+                if (chest.getX() == x & chest.getY() == y){
+                    player.pick_up(chest.getLoot());
+                }
             }
         }
         currentRoom.setPlayerLocation(playerX, playerY);

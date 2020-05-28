@@ -3,30 +3,28 @@ package Shape_Game;
 import java.util.ArrayList;
 
 public class Chest {
-    private ArrayList<Item> Loot;
-    int x;
-    int y;
+    private int x;
+    private int y;
+    private Item loot;
     private boolean looted = false;
 
-    public Chest(int xCoord, int yCoord){
+    public Chest(int xCoord, int yCoord, Item loot){
         x = xCoord;
         y = yCoord;
-        //Loot.add(random item from items collection)
-    }
-    public ArrayList<Item> getLoot(){
-        return Loot;
+        this.loot = loot;
+
     }
 
-    public int getX() {
+    public Item getLoot(){
+        return loot;
+    }
+
+    public int getX(){
         return x;
     }
 
-    public int getY() {
+    public int getY(){
         return y;
-    }
-
-    public void placeLoot(Item loot){
-        Loot.add(loot);
     }
 }
 

@@ -68,6 +68,10 @@ public class Room {
         area[y][x] = "O ";
     }
 
+    public String getLoc(int x, int y){
+        return area[y][x];
+    }
+
     Rooms getNextRoom(){
         return nextRoom;
     }
