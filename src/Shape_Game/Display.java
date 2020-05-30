@@ -58,8 +58,8 @@ public class Display {
 
     public void dispPrompt(){
         System.out.println("What do you want to do?");
-        System.out.println("(F) Pick a fight");
-        System.out.println("(S) Search for loot");
+        System.out.println("(F) Pick a fight              (U) Use an Item");
+        System.out.println("(S) Sell an item");
         System.out.println("(E) Equip item");
         System.out.println("(M) Move");
         System.out.println("(L) Let darkness consume you");

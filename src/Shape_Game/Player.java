@@ -190,10 +190,14 @@ public class Player {
         }
         // Usage of any item, including potions, reduces its quantity
         //  and removes the item if its count reaches 0
-        invCounts.put(pot.getName(), invCounts.get(pot.getName()) - 1);
-        if (invCounts.get(pot.getName()) < 1) {
-            inventory.remove(pot.getName());
-            invCounts.remove(pot.getName());
+        consumeItem(pot);
+    }
+    // Allows multiple avenues to consume an item aside from drinking potion
+    public void consumeItem(Item toGo){
+        invCounts.put(toGo.getName(), invCounts.get(toGo.getName()) - 1);
+        if (invCounts.get(toGo.getName()) < 1) {
+            inventory.remove(toGo.getName());
+            invCounts.remove(toGo.getName());
         }
     }
 
@@ -202,5 +206,26 @@ public class Player {
         if (pot.getItem_type().equals("Potion") & pot.getEffect().equals("DAM")){
             damage -= pot.getModifier();
         }
+    }
+
+    public void sellItem(Item sale){
+        switch(sale.getRarity()){
+            case "Common":
+                gainXP(100);
+                break;
+            case "Uncommon":
+                gainXP(200);
+                break;
+            case "Rare":
+                gainXP(300);
+                break;
+            case "Divine":
+                gainXP(500);
+                break;
+            case "Legendary":
+                gainXP(1000);
+                break;
+        }
+        consumeItem(sale);
     }
 }

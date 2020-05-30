@@ -37,7 +37,11 @@ public class Main {
                     break;
 
                 case "s":
-                    //player.pick_up(loot_item);
+                    System.out.println("What item do you want to sell?");
+                    String toSell = eventScan.nextLine();
+                    if (player.getInventory().containsKey(toSell)){
+                        player.sellItem(player.getInventory().get(toSell));
+                    }
                     break;
                 case "e":
                     // Moves an item in inventory to player's equipment
@@ -65,7 +69,18 @@ public class Main {
                         System.out.println("You can't go there!");
                     }
                     break;
-
+                case "u":
+                    System.out.println("What do you want to use?");
+                    String usePotion = eventScan.nextLine();
+                    if (player.getInventory().containsKey(usePotion)){
+                        if (!player.getInventory().get(usePotion).getEffect().equals("DAM")){
+                            player.use_potion(player.getInventory().get(usePotion));
+                        }
+                        else{
+                            System.out.println("You can't use damage potions out of combat");
+                        }
+                        break;
+                    }
                 case "l":
                     System.out.println("Your journey has ended");
                     return;
