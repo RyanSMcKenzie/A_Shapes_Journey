@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Chest {
     private int x;
     private int y;
-    private Item loot;
-    private boolean looted = false;
+    private final Item loot;
 
     public Chest(int xCoord, int yCoord, Item loot){
         x = xCoord;

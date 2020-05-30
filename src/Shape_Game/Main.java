@@ -12,7 +12,7 @@ public class Main {
         Combat fight = new Combat();
         world.setPlayer(player);
         world.setCurrentRoom(court);
-        Weapon sword = new Weapon(Weapon.Weapons.SWORD);
+        Weapon sword = new Weapon(Weapon.CommonWeapons.SWORD);
         player.pick_up(sword);
         Potion heal = new Potion(Potion.Potions.HEALTHPOT);
         player.pick_up(heal);

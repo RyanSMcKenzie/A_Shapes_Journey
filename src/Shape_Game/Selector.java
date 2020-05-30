@@ -22,8 +22,31 @@ public class Selector {
     }
 
     public Weapon randomWeapon(){
-        int pick = new Random().nextInt(Weapon.Weapons.values().length);
-        return new Weapon(Weapon.Weapons.values()[pick]);
+        int luck = new Random().nextInt(200);
+        if (luck == 199){
+            int pick = new Random().nextInt(Weapon.LegendaryWeapons.values().length);
+            return new Weapon(Weapon.LegendaryWeapons.values()[pick]);
+        }
+
+        if (luck < 199 & luck >= 180){
+            int pick = new Random().nextInt(Weapon.DivineWeapons.values().length);
+            return new Weapon(Weapon.DivineWeapons.values()[pick]);
+        }
+
+        if (luck < 180 & luck >= 140){
+            int pick = new Random().nextInt(Weapon.RareWeapons.values().length);
+            return new Weapon(Weapon.RareWeapons.values()[pick]);
+        }
+
+        if (luck < 140 & luck >= 80){
+            int pick = new Random().nextInt(Weapon.UncommonWeapons.values().length);
+            return new Weapon(Weapon.UncommonWeapons.values()[pick]);
+        }
+
+        else{
+            int pick = new Random().nextInt(Weapon.CommonWeapons.values().length);
+            return new Weapon(Weapon.CommonWeapons.values()[pick]);
+        }
     }
 
     public Potion randomPotion(){
@@ -32,8 +55,31 @@ public class Selector {
     }
 
     public Armor randomArmor(){
-        int pick = new Random().nextInt(Armor.Armors.values().length);
-        return new Armor(Armor.Armors.values()[pick]);
+        int luck = new Random().nextInt(200);
+        if (luck == 199){
+            int pick = new Random().nextInt(Armor.LegendaryArmors.values().length);
+            return new Armor(Armor.LegendaryArmors.values()[pick]);
+        }
+
+        if (luck < 199 & luck >= 180){
+            int pick = new Random().nextInt(Armor.DivineArmors.values().length);
+            return new Armor(Armor.DivineArmors.values()[pick]);
+        }
+
+        if (luck < 180 & luck >= 140){
+            int pick = new Random().nextInt(Armor.RareArmors.values().length);
+            return new Armor(Armor.RareArmors.values()[pick]);
+        }
+
+        if (luck < 140 & luck >= 80){
+            int pick = new Random().nextInt(Armor.UncommonArmors.values().length);
+            return new Armor(Armor.UncommonArmors.values()[pick]);
+        }
+
+        else{
+            int pick = new Random().nextInt(Armor.CommonArmors.values().length);
+            return new Armor(Armor.CommonArmors.values()[pick]);
+        }
     }
 
     public Item randomLoot(){

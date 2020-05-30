@@ -13,9 +13,6 @@ public class Player {
     private int maxHealth = 10;
     private int health = 10;
     private int damage = 10;
-    private Room currentRoom;
-    private int roomX = 0;
-    private int roomY = 4;
     private HashMap<String, Item> equipped  = new HashMap<>();
     private HashMap<String, Item> inventory = new HashMap<>();
     private HashMap<String, Integer> invCounts = new HashMap<>();
@@ -201,6 +198,7 @@ public class Player {
     }
 
     public void resetPotion(Item pot){
+        // Resets effect of damage potion after a combat ends
         if (pot.getItem_type().equals("Potion") & pot.getEffect().equals("DAM")){
             damage -= pot.getModifier();
         }
