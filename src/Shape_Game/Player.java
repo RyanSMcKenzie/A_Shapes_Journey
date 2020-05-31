@@ -8,8 +8,8 @@ import java.util.Map;
 public class Player {
     // Player class: level, health, base damage, inventory items arraylist
     private int level = 1;
-    private int experiencePoints = 0;
-    private int experienceToLevel = 100;
+    private long experiencePoints = 0;
+    private long experienceToLevel = 100;
     private int maxHealth = 10;
     private int health = 10;
     private int damage = 10;
@@ -37,13 +37,13 @@ public class Player {
 
     public void gainXP(int exp){
         experiencePoints += exp;
-        if (experiencePoints >= experienceToLevel){
+        while (experiencePoints >= experienceToLevel){
             level_up();
         }
     }
     public String showExp(){
-        return Integer.toString(experiencePoints) + "/"
-                + Integer.toString(experienceToLevel);
+        return Long.toString(experiencePoints) + "/"
+                + Long.toString(experienceToLevel);
     }
     //Returns health to player
     public void heal(int amount){
@@ -122,13 +122,13 @@ public class Player {
             itemsOut.append(outItem.getValue().getName());
             itemsOut.append("(").append(invCounts.get(outItem.getValue().getName())
                     .toString()).append(")");
-
+            itemsOut.append("\u001B[0m");
             // Add a sweet comma if not the end of listing
             if (itemOutIter.hasNext()) {
                 itemsOut.append(", ");
             }
         }
-        itemsOut.append("\u001B[0m");
+
         return itemsOut.toString();
     }
 
@@ -182,10 +182,11 @@ public class Player {
                 break;
 
             case "XP":
-                gainXP(pot.getModifier());
                 if (pot.getModifier() == 0){
+                    experiencePoints = experienceToLevel;
                     level_up();
                 }
+                gainXP(pot.getModifier());
                 break;
         }
         // Usage of any item, including potions, reduces its quantity
@@ -206,6 +207,10 @@ public class Player {
         if (pot.getItem_type().equals("Potion") & pot.getEffect().equals("DAM")){
             damage -= pot.getModifier();
         }
+    }
+
+    public HashMap<String, Integer> getInvCounts() {
+        return invCounts;
     }
 
     public void sellItem(Item sale){

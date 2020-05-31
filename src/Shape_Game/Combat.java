@@ -11,6 +11,7 @@ public class Combat {
         Item toUse = new Potion(Potion.Potions.HEALTHPOT);
         int rounds = 0;
         int turn = 1;
+        enemy1.setDamage((int) (enemy1.getDamage()*world.getChaosMod()));
 
         // While player and enemy are alive, combat continues
         while (player.getHealth() > 0 && enemy1.getHitpoints() > 0){
@@ -24,8 +25,9 @@ public class Combat {
             // Player action decision
             switch (Action){
                 case "a":
-                    enemy1.takeDamage(player.getDamage());
-                    System.out.println("You dealt " + player.getDamage() + " damage!");
+                    int dealt = player.getDamage()-world.getToughMod();
+                    enemy1.takeDamage(dealt);
+                    System.out.println("You dealt " + dealt + " damage!");
                     break;
                 // Player uses an item
                 case "u":
@@ -49,7 +51,7 @@ public class Combat {
             if (enemy1.getHitpoints() <= 0) {
                 String defeat = String.format("You defeated %s", enemy1.getName());
                 System.out.println(defeat);
-                player.gainXP(enemy1.getMaxHP());
+                player.gainXP(enemy1.getMaxHP()*world.getRoomMult());
                 scan.nextLine();
                 break;
             }

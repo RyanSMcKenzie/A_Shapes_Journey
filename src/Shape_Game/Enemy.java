@@ -1,7 +1,5 @@
 package Shape_Game;
 
-import java.util.ArrayList;
-
 public class Enemy {
     // Enemy class data members
     private String category;
@@ -9,7 +7,6 @@ public class Enemy {
     private int maxHP;
     private int damage;
     private String name;
-    private java.util.ArrayList<Item> loot = new ArrayList<>();
 
     public enum Enemies {
         SKELETON("Skeleton","Undead",10,5),
@@ -66,7 +63,8 @@ public class Enemy {
         return damage;
     }
 
-    public ArrayList<Item> getLoot() {
-        return loot;
+    public void setDamage(int newDamage){
+        damage = newDamage;
     }
+
 }

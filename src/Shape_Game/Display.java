@@ -8,6 +8,9 @@ public class Display {
     private int playerX = 0;
     private int playerY = 0;
     private ArrayList<Chest> chests = new ArrayList<>();
+    private int roomMult = 1;
+    private double chaosMod = 1.1;
+    private int toughMod = 0;
 
     public Display(){}
 
@@ -17,6 +20,18 @@ public class Display {
         currentRoom.setPlayerLocation(0, 0);
     }
 
+    public double getChaosMod(){
+        return chaosMod;
+    }
+
+    public int getToughMod(){
+        return toughMod;
+    }
+
+    public int getRoomMult(){
+        // Returns room multiplier for experience gain boost on advancement
+        return roomMult;
+    }
     public void setPlayer(Player player){
         this.player = player;
     }
@@ -24,7 +39,13 @@ public class Display {
     public void addChest(Chest chest){
 
         chests.add(chest);
-        currentRoom.setChestLocation(chest.getX(), chest.getY());
+        int x = chest.getX();
+        int y = chest.getY();
+        if (x == playerX & y == playerY){
+            x -= 1;
+            y -= 1;
+        }
+        currentRoom.setChestLocation(x, y);
     }
 
     // Move player position by some (x, y) offset
@@ -42,6 +63,9 @@ public class Display {
                 setCurrentRoom(newRoom);
                 playerX = 0;
                 playerY = 0;
+                roomMult += 10;
+                chaosMod = Math.pow(chaosMod, 2);
+                toughMod += 5;
             } catch (Exception NullPointerException) {
                 System.out.print("");
             }

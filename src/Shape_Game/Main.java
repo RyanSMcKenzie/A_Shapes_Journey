@@ -1,6 +1,7 @@
 package Shape_Game;
 
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Main {
@@ -39,8 +40,15 @@ public class Main {
                 case "s":
                     System.out.println("What item do you want to sell?");
                     String toSell = eventScan.nextLine();
+
+                    // Player can only sell items in inventory
                     if (player.getInventory().containsKey(toSell)){
-                        player.sellItem(player.getInventory().get(toSell));
+                        // Player cannot sell equipped items
+                        if (!player.getEquipped().containsValue(
+                                player.getInventory().get(toSell)) |
+                        player.getInvCounts().get(toSell) > 1) {
+                            player.sellItem(player.getInventory().get(toSell));
+                        }
                     }
                     break;
                 case "e":
@@ -59,15 +67,20 @@ public class Main {
                     // Moves player to another location in room
                     System.out.println("Where on the 10x10 grid? (x,y)");
                     String[] loc = eventScan.nextLine().split(",");
-                    int x_coord = Integer.parseInt(loc[0]) - 1;
-                    int y_coord = Integer.parseInt(loc[1]) - 1;
-                    if (x_coord >= 0 & x_coord <= 9
-                    & y_coord >= 0 & y_coord <= 9){
-                        world.movePlayer(x_coord, y_coord);
+                    try {
+                        int x_coord = Integer.parseInt(loc[0]) - 1;
+                        int y_coord = Integer.parseInt(loc[1]) - 1;
+
+                        if (x_coord >= 0 & x_coord <= 9
+                                & y_coord >= 0 & y_coord <= 9) {
+                            world.movePlayer(x_coord, y_coord);
+                        } else {
+                            System.out.println("You can't go there!");
+                        }
                     }
-                    else {
-                        System.out.println("You can't go there!");
-                    }
+                    catch (Exception ArrayIndexOutOfBoundsException){
+                        System.out.println("Not a valid input");
+                }
                     break;
                 case "u":
                     System.out.println("What do you want to use?");
@@ -79,8 +92,8 @@ public class Main {
                         else{
                             System.out.println("You can't use damage potions out of combat");
                         }
-                        break;
                     }
+                    break;
                 case "l":
                     System.out.println("Your journey has ended");
                     return;
