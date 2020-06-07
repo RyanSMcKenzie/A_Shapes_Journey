@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="A_Shapes_Journey" target="1.13" />
+      <module name="A_Shapes_Journey" target="13" />
     </bytecodeTargetLevel>
   </component>
 </project>

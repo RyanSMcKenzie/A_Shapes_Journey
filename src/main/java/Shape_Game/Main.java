@@ -103,6 +103,7 @@ public class Main {
 
                 case "load":
                     try{
+                        // Load player data from JSON
                     player = save.loadPlayer();
                     world.setPlayer(player);
                     }

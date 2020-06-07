@@ -28,11 +28,25 @@ public class Player {
 
     //Increments player level
     public void level_up(){
-        level++;
-        maxHealth = maxHealth + 5;
-        health = health + 5;
-        damage = damage + 1;
-        experienceToLevel *= 2.5;
+        if (level < 10) {
+            level++;
+            maxHealth = maxHealth + 5;
+            health = health + 5;
+            damage = damage + 1;
+            experienceToLevel *= 2.5;
+        }
+        else if (level < 20) {
+            level++;
+            maxHealth += 10;
+            health += 10;
+            damage += 3;
+            experienceToLevel *= 2.5;
+        }
+        else {
+            maxHealth += 15;
+            health += 15;
+            damage += 5;
+        }
     }
 
     public void gainXP(int exp){

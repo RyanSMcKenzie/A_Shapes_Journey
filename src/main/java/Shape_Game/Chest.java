@@ -1,7 +1,5 @@
 package Shape_Game;
 
-import java.util.ArrayList;
-
 public class Chest {
     private int x;
     private int y;
@@ -17,7 +15,12 @@ public class Chest {
     public Item getLoot(){
         return loot;
     }
-
+    public void setX(int x) {
+        this.x = x;
+    }
+    public void setY(int y){
+        this.y = y;
+    }
     public int getX(){
         return x;
     }

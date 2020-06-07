@@ -41,9 +41,18 @@ public class Display {
         chests.add(chest);
         int x = chest.getX();
         int y = chest.getY();
-        if (x == playerX & y == playerY){
+        if (x == playerX && y == playerY){
             x -= 1;
             y -= 1;
+
+            if (x < 0){
+                x += 2;
+            }
+            if (y < 0){
+                y += 2;
+            }
+            chest.setX(x);
+            chest.setY(y);
         }
         currentRoom.setChestLocation(x, y);
     }
@@ -56,7 +65,7 @@ public class Display {
         Chest looted = null;
 
         // If player enters the allotted door space, move to next room
-        if (x == 9 & y == 9) {
+        if (x == 9 && y == 9) {
 
             // Try-Catch prevents crash for final room (no nextRoom)
             try {
