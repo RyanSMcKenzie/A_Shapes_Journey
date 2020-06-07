@@ -114,6 +114,13 @@ public class Armor extends Item {
             this.slot = slot;
         }
     }
+
+    // Default constructor for JSON errors
+    public Armor() {
+        super();
+        this.damageRed = 0;
+    }
+
     public Armor (CommonArmors armor){
         super(armor.name, armor.item_type, armor.rarity, armor.slot);
         damageRed = armor.reduction;

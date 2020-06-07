@@ -9,8 +9,10 @@ public class Weapon extends Item {
         DAGGER("Dagger", "Weapon", "Common", 5, "Hand"),
         STAFF("Staff", "Weapon", "Common", 12, "Hand"),
         AXE("Axe", "Weapon", "Common", 11, "Hand"),
-        GREATSWORD("Greatsword", "Weapon", "Common", 13, "Hand"),
-        WAND("Wand", "Weapon", "Common", 7, "Hand");
+        GREAT("Greatsword", "Weapon", "Common", 13,
+                "Hand"),
+        WAND("Wand", "Weapon", "Common", 7, "Hand"),
+        SPEAR("Spear","Weapon","Common",10,"Hand");
 
         private final String name;
         private final String item_type;
@@ -36,6 +38,14 @@ public class Weapon extends Item {
         SDAGGER("Steel Dagger", "Weapon", "Uncommon", 6,
                 "Hand"),
         FWAND("Fire Wand", "Weapon", "Uncommon", 10,
+                "Hand"),
+        WSTAFF("Wizard Staff","Weapon","Uncommon", 12,
+                "Hand"),
+        SGREAT("Steel Greatsword","Weapon","Uncommon",13,
+                "Hand"),
+        SAXE("Steel Axe","Weapon","Uncommon",12,
+                "Hand"),
+        SSPEAR("Steel Spear","Weapon","Uncommon",11,
                 "Hand");
 
         private final String name;
@@ -57,9 +67,21 @@ public class Weapon extends Item {
     }
 
     public enum RareWeapons {
-        MSWORD("Mystic Sword", "Weapon", "Rare", 13, "Hand"),
-        WDAGGER("Witch Knife", "Weapon", "Rare", 7, "Hand"),
-        IWAND("Ice Wand", "Weapon", "Rare", 13, "Hand");
+        MSWORD("Mystic Sword", "Weapon", "Rare",
+                12, "Hand"),
+        WDAGGER("Witch Knife", "Weapon", "Rare",
+                7, "Hand"),
+        IWAND("Ice Wand", "Weapon", "Rare",
+                13, "Hand"),
+        STSTAFF("Star Staff","Weapon","Rare",
+                12,"Hand"),
+        MGREAT("Mystic Greatsword", "Weapon","Rare",
+                14,"Hand"),
+        DAXE("Diamond Axe","Weapon","Rare",
+                12,"Hand"),
+        OSPEAR("Obsidian Spear","Weapon","Rare",
+                11,"Hand");
+
 
         // Define data members for Weapons
         private final String name;
@@ -81,9 +103,16 @@ public class Weapon extends Item {
     }
 
     public enum DivineWeapons {
-        DSWORD("Dark Edge", "Weapon", "Divine", 14, "Hand"),
-        DDAGGER("Demonic Razor", "Weapon", "Divine", 8, "Hand"),
-        SWAND("Shadow Wand", "Weapon", "Divine", 17, "Hand");
+        DSWORD("Dark Edge", "Weapon", "Divine",
+                12, "Hand"),
+        DDAGGER("Demonic Razor", "Weapon", "Divine",
+                8, "Hand"),
+        SWAND("Shadow Wand", "Weapon", "Divine",
+                13, "Hand"),
+        SSPIRE("Shamanic Spire", "Weapon","Divine",
+                12, "Hand"),
+        DSPEAR("Divine Spear","Weapon","Divine",
+                11, "Hand");
 
         // Define data members for Weapons
         private final String name;
@@ -106,7 +135,17 @@ public class Weapon extends Item {
 
     public enum LegendaryWeapons {
         RYAN_BLADE("Ryan's Blade", "Weapon", "Legendary",
-                11, "Hand");
+                11, "Hand"),
+        GRIMSTAFF("Grimoire's Staff", "Weapon","Legendary",
+                10, "Hand"),
+        FURY("Fury","Weapon","Legendary",11,
+                "Hand"),
+        SPITE("Spite","Weapon","Legendary",12,
+                "Hand"),
+        SHAMMER("Hammer of Storms","Weapon","Legendary",
+                12, "Hand"),
+        LSPEAR("Lance of the Gods","Weapon","Legendary",
+                13, "Hand");
 
         // Define data members for Weapons
         private final String name;
@@ -125,6 +164,12 @@ public class Weapon extends Item {
             this.slot = slot;
 
         }
+    }
+
+    // Default constructor for JSON errors
+    public Weapon() {
+        super();
+        this.damageMod = 0;
     }
 
     public Weapon(CommonWeapons weapon) {

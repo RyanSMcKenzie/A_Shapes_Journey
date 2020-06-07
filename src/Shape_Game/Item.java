@@ -1,6 +1,18 @@
 package Shape_Game;
 
-import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Weapon.class, name = "Weapon"),
+
+        @JsonSubTypes.Type(value = Armor.class, name = "Armor"),
+
+        @JsonSubTypes.Type(value = Potion.class, name = "Potion")}
+)
 
 public class Item {
     // Item superclass has name, type, and rarity
@@ -8,6 +20,12 @@ public class Item {
     private final String item_type;
     private final String rarity;
 
+    // Default constructor for JSON errors
+    public Item(){
+        this.name = null;
+        this.item_type = null;
+        this.rarity = null;
+    }
     public Item(String name, String item_type, String rarity, String slot){
         this.name = name;
         this.item_type = item_type;

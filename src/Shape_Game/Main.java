@@ -1,13 +1,14 @@
 package Shape_Game;
 
-
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.Scanner;
+
 
 public class Main {
 
     public static void main(String[] args) {
         Player player = new Player();
+        Saver save = new Saver();
         Room court = new Room(Room.Rooms.COURTYARD);
         Display world = new Display();
         Combat fight = new Combat();
@@ -93,6 +94,22 @@ public class Main {
                             System.out.println("You can't use damage potions out of combat");
                         }
                     }
+                    break;
+
+                case "save":
+                    // Save player data as JSON
+                    save.savePlayer(player);
+                    break;
+
+                case "load":
+                    try{
+                    player = save.loadPlayer();
+                    world.setPlayer(player);
+                    }
+                    catch (IOException e) {
+                        //e.printStackTrace();
+                        System.out.println("No file to load");
+                }
                     break;
                 case "l":
                     System.out.println("Your journey has ended");

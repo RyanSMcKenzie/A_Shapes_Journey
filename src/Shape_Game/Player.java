@@ -60,6 +60,10 @@ public class Player {
         return level;
     }
 
+    public long getExperiencePoints() { return experiencePoints; }
+
+    public long getExperienceToLevel() { return experienceToLevel; }
+
     //Returns max health of player
     public int getMaxHealth() { return maxHealth; }
 
@@ -69,7 +73,7 @@ public class Player {
     }
 
     //Returns players current damage value
-    public int getDamage() {
+    public int getEffDamage() {
         int dealt = damage;
 
         try {
@@ -80,6 +84,9 @@ public class Player {
             return dealt;
         }
 
+    }
+    public int getDamage() {
+        return damage;
     }
 
     public void takeDamage(int dam) {

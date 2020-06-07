@@ -36,6 +36,12 @@ public class Potion extends Item {
         }
     }
 
+    // Default constructor for JSON errors
+    public Potion(){
+        super();
+        this.effect = null;
+        this.modifier = 0;
+    }
     // Potion object constructs as item plus effect and modifier
     public Potion(Potions potion){
         super(potion.name, potion.item_type, potion.rarity, potion.slot);

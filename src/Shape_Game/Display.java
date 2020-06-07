@@ -53,6 +53,7 @@ public class Display {
         currentRoom.resetLoc(playerX, playerY);
         playerX = x;
         playerY = y;
+        Chest looted = null;
 
         // If player enters the allotted door space, move to next room
         if (x == 9 & y == 9) {
@@ -74,7 +75,11 @@ public class Display {
             for (Chest chest: chests){
                 if (chest.getX() == x & chest.getY() == y){
                     player.pick_up(chest.getLoot());
+                    looted = chest;
                 }
+            }
+            if (looted != null) {
+                chests.remove(looted);
             }
         }
         currentRoom.setPlayerLocation(playerX, playerY);
@@ -104,7 +109,7 @@ public class Display {
         System.out.println("Health: " + player.getHealth() + "/" + player.getMaxHealth());
 
         // Show current damage
-        System.out.println("Damage: " + player.getDamage());
+        System.out.println("Damage: " + player.getEffDamage());
 
 
 

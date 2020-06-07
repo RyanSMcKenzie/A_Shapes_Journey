@@ -25,7 +25,7 @@ public class Combat {
             // Player action decision
             switch (Action){
                 case "a":
-                    int dealt = player.getDamage()-world.getToughMod();
+                    int dealt = player.getEffDamage()-world.getToughMod();
                     enemy1.takeDamage(dealt);
                     System.out.println("You dealt " + dealt + " damage!");
                     break;
