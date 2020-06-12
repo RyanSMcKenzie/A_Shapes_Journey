@@ -82,20 +82,29 @@ public class Selector {
         }
     }
 
+    public Collectible randomCollectible(){
+        int pick = new Random().nextInt(Collectible.Collectibles.values().length);
+        return new Collectible(Collectible.Collectibles.values()[pick]);
+    }
+
     public Item randomLoot(){
-        int pick = new Random().nextInt(3);
+        int pick = new Random().nextInt(102);
 
         System.out.println(pick);
-        if (pick == 0){
+        if (pick < 33){
             return randomArmor();
         }
 
-        if (pick == 1){
+        else if (pick > 33 && pick < 66){
             return randomWeapon();
         }
 
-        else {
+        else if (pick > 66 && pick < 100){
             return randomPotion();
+        }
+
+        else{
+            return randomCollectible();
         }
 
     }

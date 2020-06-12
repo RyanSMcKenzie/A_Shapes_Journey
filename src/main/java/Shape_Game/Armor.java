@@ -115,6 +115,26 @@ public class Armor extends Item {
         }
     }
 
+    public enum ForbiddenArmors{
+        SHAPEPLATE("A Shape's Platemail", "Armor", "Forbidden",
+                30, "Body");
+
+        private final String name;
+        private final String item_type;
+        private final String rarity;
+        private final int reduction;
+        private final String slot;
+
+        ForbiddenArmors(String name, String item_type, String rarity, int reduction,
+                        String slot){
+            this.name = name;
+            this.item_type = item_type;
+            this.rarity = rarity;
+            this.reduction = reduction;
+            this.slot = slot;
+        }
+    }
+
     // Default constructor for JSON errors
     public Armor() {
         super();
@@ -142,6 +162,11 @@ public class Armor extends Item {
     }
 
     public Armor (LegendaryArmors armor){
+        super(armor.name, armor.item_type, armor.rarity, armor.slot);
+        damageRed = armor.reduction;
+    }
+
+    public Armor(ForbiddenArmors armor) {
         super(armor.name, armor.item_type, armor.rarity, armor.slot);
         damageRed = armor.reduction;
     }

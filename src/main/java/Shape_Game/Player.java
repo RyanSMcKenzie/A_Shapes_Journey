@@ -22,6 +22,7 @@ public class Player {
         put("Rare", "\u001B[35m");
         put("Divine", "\u001b[93m");
         put("Legendary", "\u001B[31m");
+        put("Forbidden", "\u001b[96m");
     }};
 
     public Player(){}
@@ -122,7 +123,23 @@ public class Player {
         // If they do, increase the quantity of this item
         else {
             invCounts.put(new_item.getName(), invCounts.get(new_item.getName())+1);
+
+            // If player has all of the collectibles for an item, fuse
+            //  the pieces to give the item instead.
+            if (new_item.getItem_type().equals("Collectible") &&
+                    invCounts.get(new_item.getName()) == new_item.getPieces()){
+                    pick_up(fuseItem(new_item));
+            }
         }
+    }
+
+    public Item fuseItem(Item fusion){
+        // Reduces collectible to 0 and returns constructed item
+        while (invCounts.get(fusion.getName()) > 1){
+            consumeItem(fusion);
+        }
+        consumeItem(fusion);
+        return fusion.getConstructs();
     }
 
     //Returns contents of players inventory

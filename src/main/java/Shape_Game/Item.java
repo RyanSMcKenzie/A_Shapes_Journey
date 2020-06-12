@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
         @JsonSubTypes.Type(value = Armor.class, name = "Armor"),
 
-        @JsonSubTypes.Type(value = Potion.class, name = "Potion")}
+        @JsonSubTypes.Type(value = Potion.class, name = "Potion"),
+
+        @JsonSubTypes.Type(value = Collectible.class, name = "Collectible")}
 )
 
 public class Item {
@@ -46,6 +48,7 @@ public class Item {
     public String getEffect() {return "None"; }
     public int getModifier() {return 0;}
 
-    public int getDamageRed() { return 0;
-    }
+    public int getDamageRed() { return 0; }
+    public int getPieces() { return 0; }
+    public Item getConstructs() { return null; }
 }

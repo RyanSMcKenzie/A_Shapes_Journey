@@ -166,6 +166,28 @@ public class Weapon extends Item {
         }
     }
 
+    public enum ForbiddenWeapons {
+        SHAPESWORD("A Shape's Blade", "Weapon","Forbidden",
+                14, "Hand"),
+        SHAPEAXE("A Shape's Axe", "Weapon","Forbidden",
+                14, "Hand");
+
+        private final String name;
+        private final String item_type;
+        private final String rarity;
+        private final int damage;
+        private final String slot;
+
+        ForbiddenWeapons(String name, String item_type, String rarity,
+        int damage, String slot){
+            this.name = name;
+            this.item_type = item_type;
+            this.rarity = rarity;
+            this.damage = damage;
+            this.slot = slot;
+        }
+    }
+
     // Default constructor for JSON errors
     public Weapon() {
         super();
@@ -199,6 +221,12 @@ public class Weapon extends Item {
         super(weapon.name, weapon.item_type, weapon.rarity, weapon.slot);
         this.damageMod = weapon.damage;
         damageMod *= 5;
+    }
+
+    public Weapon(ForbiddenWeapons weapon) {
+        super(weapon.name, weapon.item_type, weapon.rarity, weapon.slot);
+        this.damageMod = weapon.damage;
+        damageMod *= 7;
     }
 
     public int getDamageMod() {
