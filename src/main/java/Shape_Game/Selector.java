@@ -103,6 +103,7 @@ public class Selector {
             return randomPotion();
         }
 
+        // Players have a small chance of acquiring a very rare collection item
         else{
             return randomCollectible();
         }

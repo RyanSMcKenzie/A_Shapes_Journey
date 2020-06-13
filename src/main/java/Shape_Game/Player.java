@@ -29,6 +29,7 @@ public class Player {
 
     //Increments player level
     public void level_up(){
+        // Player levels less than 10
         if (level < 10) {
             level++;
             maxHealth = maxHealth + 5;
@@ -36,6 +37,7 @@ public class Player {
             damage = damage + 1;
             experienceToLevel *= 2.5;
         }
+        // Player levels between 10 and 20 gain more
         else if (level < 20) {
             level++;
             maxHealth += 10;
@@ -43,6 +45,9 @@ public class Player {
             damage += 3;
             experienceToLevel *= 2.5;
         }
+        // Once max level is reached gaining experience
+        //  results in higher gains in stats, to compensate
+        //  for high endgame difficulty
         else {
             maxHealth += 15;
             health += 15;

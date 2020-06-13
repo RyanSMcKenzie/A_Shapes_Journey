@@ -21,8 +21,10 @@ public class Main {
         world.update();
         Scanner eventScan = new Scanner(System.in);
         Selector select = new Selector();
+        // Outer game loop, terminates upon player death
         while (player.getHealth() > 0) {
             String act = eventScan.nextLine();
+            // Initializes a combat scenario
             switch (act) {
                 case "f":
                     Enemy enemy1 = select.randomEnemy();

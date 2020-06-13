@@ -74,7 +74,7 @@ public class Display {
                 playerX = 0;
                 playerY = 0;
                 roomMult += 10;
-                chaosMod = Math.pow(chaosMod, 2);
+                chaosMod *= 1.15;
                 toughMod += 5;
             } catch (Exception NullPointerException) {
                 System.out.print("");
