@@ -8,6 +8,7 @@ import java.util.Map;
 public class Player {
     // Player class: level, health, base damage, inventory items arraylist
     private int level = 1;
+    private int epic = 0;
     private long experiencePoints = 0;
     private long experienceToLevel = 100;
     private int maxHealth = 10;
@@ -48,22 +49,30 @@ public class Player {
         // Once max level is reached gaining experience
         //  results in higher gains in stats, to compensate
         //  for high endgame difficulty
-        else {
+        else if (epic < 5){
+            epic++;
             maxHealth += 15;
             health += 15;
             damage += 5;
+            experiencePoints = 0;
+            experienceToLevel = 10000000;
         }
     }
 
     public void gainXP(int exp){
-        experiencePoints += exp;
-        while (experiencePoints >= experienceToLevel){
-            level_up();
+        if (epic < 5) {
+            experiencePoints += exp;
+            while (experiencePoints >= experienceToLevel) {
+                level_up();
+            }
         }
     }
     public String showExp(){
-        return Long.toString(experiencePoints) + "/"
-                + Long.toString(experienceToLevel);
+        if (epic < 5) {
+            return Long.toString(experiencePoints) + "/"
+                    + Long.toString(experienceToLevel);
+        }
+        return "MAX";
     }
     //Returns health to player
     public void heal(int amount){
@@ -79,6 +88,8 @@ public class Player {
     public int getLevel() {
         return level;
     }
+
+    public int getEpic() { return epic; }
 
     public long getExperiencePoints() { return experiencePoints; }
 

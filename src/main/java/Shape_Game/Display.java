@@ -109,7 +109,14 @@ public class Display {
         System.out.flush();
 
         // Show level and experience
-        System.out.println("Level: " + player.getLevel());
+        // If player has gained epic levels, show them
+        System.out.print("Level: " + player.getLevel());
+        if (player.getEpic() > 0){
+            System.out.println("   Epic: " + player.getEpic());
+        }
+        else{
+            System.out.println();
+        }
         System.out.println("Experience: " + player.showExp());
         // Show items in inventory
         System.out.println("Inventory: " + player.showInventory());
