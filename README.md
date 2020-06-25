@@ -24,4 +24,4 @@ The game features:
 10) Terminal display of player data, including inventory and equipped items
 
 ![Endgame Screencap]
-(https://github.com/RyanSMcKenzie/A_Shapes_Journey/blob/master/Screen%20Shot%202020-06-25%20at%202.37.42%20PM.png)
+(/Users/ryanmckenzie/Desktop/Screen Shot 2020-06-25 at 2.37.42 PM.png)
