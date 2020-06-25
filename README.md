@@ -23,5 +23,5 @@ The game features:
 9) JSON saving of player data
 10) Terminal display of player data, including inventory and equipped items
 
-![Endgame Screencap]
-(/Users/ryanmckenzie/Desktop/Screen Shot 2020-06-25 at 2.37.42 PM.png)
+![Endgame Screencap](https://github.com/RyanSMcKenzie/A_Shapes_Journey/blob/master/Screen%20Shot%202020-06-25%20at%202.37.42%20PM.png)
+Picture: A screenshot of the UI from an endgame character.
